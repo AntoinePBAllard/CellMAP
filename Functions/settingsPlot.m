@@ -1,7 +1,0 @@
-set(gcf,'units','centimeters','position',[1 1 4.6 4.6])
-set(gca,'FontName','Times New Roman')
-set(gca,'FontSize',8)
-set(gca,'XColor',[0 0 0],'YColor',[0 0 0],'ZColor',[0 0 0])
-set(gca,'GridColor',[0 0 0],'MinorGridColor',[0 0 0])
-set(gca,'Color','none')
-set(gca,'PlotBoxAspectRatio',[1 1 1])
