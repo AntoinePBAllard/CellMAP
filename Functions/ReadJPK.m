@@ -1,4 +1,10 @@
 function [indent,height,force] = ReadJPK(folder)
+%% This function reads all subfolder in 'folder' (unzip from jpk using UnzipJPK.m)
+%% and reconstruct indentation and height maps, as well as force curve.
+% This code has been adapted from someone else, written in another langage
+% (python?), but to date I cannot find the source. I apologise for that,
+% and I am ready to acknowledge the person if they read this message.
+
 InfoDir=dir(folder);
 index_header=find(strcmp({InfoDir.name},'header.properties')==1);
 index_shared_data=find(strcmp({InfoDir.name},'shared-data')==1);
@@ -36,7 +42,7 @@ for i=1:size(header_metadata_raw,1)
     end
 end
 
-% This is only useful for the retraction
+% The following is only useful for the retraction
 % segment_count_location = strcmp(header_shared_data_metadata_split(:,1),'force-segment-header-infos.count')==1;
 % segment_count = str2double(header_shared_data_metadata_split(segment_count_location,2));
 % strToFind ={'force-segment-header-info.';'.settings.style'};
@@ -195,17 +201,9 @@ for segment_style = {'extend'}
                     idx = strfind(folder,filesep);
                     ProcForce = folder(1:idx(end-1)-1);
                     processed = dir(fullfile(ProcForce,strcat(temp{end},'*tsv')));
-%                     tic
-%                     Data_Processed = tdfread(fullfile(processed(end).folder,processed(end).name));
-%                     toc
-%                     tic
-%                     Data_Processed = tsvread(fullfile(processed(end).folder,processed(end).name));
-%                     toc
                     fid= fopen(fullfile(processed(end).folder,processed(end).name));
                     Data_ProcessedTitle = textscan(fid,'%s',13,'delimiter','\t'); % NEEDS TO BE OPEN ONCE!
-%                     for i = 1:index+1
                         Data_Processed = textscan(fid,'%s %d8 %u %u %f64 %f64 %u %u %f %f %f %f %f',ilength^2,'delimiter','\t');
-%                     end
                     fclose(fid);
                     
                     cond = ~isnan(height(row,col,:));
