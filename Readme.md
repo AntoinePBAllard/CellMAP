@@ -9,14 +9,13 @@ Last updated: 2024-03-15.
  
 ## DOI: TBD
  
-## Contact email: antoine.allard@u-bordeaux.fr
+## Contact email: antoine.allard [at] u-bordeaux.fr
  
  
 # METHODOLOGICAL INFORMATION 
  
 ## System Requirements
 - CellMAP requires MATLAB (R2020b or above), or Matlab Runtime, a freely accessible software that can be downloaded online. 
-- To fasten loading of force curves, a free file archiver (such as 7-Zip) is recommended.
 - Two types of installation are possible. 
 	- For Matlab license owners, run it, click on Apps from the toolbar, “Install App” and select CellMAP.mlappinstall. After completion, a new icon called CellMAP will been added in the Apps list. 
 	- For a Matlab license-free use of CellMAP, Matlab Runtime should be installed, and execute the standalone application CellMAP.exe.
@@ -34,9 +33,8 @@ Last updated: 2024-03-15.
 ## Methods for processing the data: 
 
 # Import/Export
-- Two options are available in the “File” menu: “New session” and “Load session”. The latter enables the user to reload a previous workflow. If for the first time, click on the “New session” item. Select the folder that contains the sub-folders you wish to analyze, organized as described above (see System Requirements). All sub-folders will also be loaded by the CellMAP (e.g. a dataset in which each sub-folder corresponds to a distinct cell). When force data are available (*.jpk-qi-data extension), a dialog box enables the user to load these force curves. In this case, the user has the option of choosing an external executable (e.g. 7z.exe) to speed up unzipping by a factor of about 3, compared to the built-in application from MATLAB. CellMAP unzips force data (saved at the same location as the *.jpk-qi-data file).
-- After importation, the session starts and you will be able to work on the displayed data. At any time, you can “Export” your
-“Session” as it is. A *.dat file is saved and can be reloaded in CellMAP later (“File/Load session”). Another useful “Add-on” is the possibility to “Record” your “Pipeline”, which means that CellMAP will record all procedures applied to your current dataset. After completion, “Stop recording” saves this workflow, which can easily be loaded to process another dataset the exact same way. “Data” can be exported as *.txt files, which enables the user to work with processed data outside CellMAP. Files will be available in the working folder.
+- Two options are available in the “File” menu: “New session” and “Load session”. The latter enables the user to reload a previous workflow. If for the first time, click on the “New session” item. Select the folder that contains the sub-folders you wish to analyze, organized as described above (see System Requirements). All sub-folders will also be loaded by the CellMAP (e.g. a dataset in which each sub-folder corresponds to a distinct cell). When force data are available (*.jpk-qi-data extension), a dialog box enables the user to load these force curves.
+- After importation, the session starts and you will be able to work on the displayed data. At any time, you can “Export” your “Session” as it is. A *.dat file is saved and can be reloaded in CellMAP later (“File/Load session”). Another useful “Add-on” is the possibility to “Record” your “Pipeline”, which means that CellMAP will record all procedures applied to your current dataset. After completion, “Stop recording” saves this workflow, which can easily be loaded to process another dataset the exact same way. “Data” can be exported as *.txt files, which enables the user to work with processed data outside CellMAP. Files will be available in the working folder.
 
 # Initial settings
 - After completion of the loading step, available data are displayed in the “Parameters” panel (Figure 3). The following procedure is a first guide to handle raw data. AFM maps and their characteristics are automatically updated in the “Mapping”, “Distribution”, “Geometry” and “Statistics” panels. We here describe the use of the “Parameters” panel, which enables the user to select and visualize one dataset. All loaded cells are numbered and accessible using the spinner “Cell n°”. In the given example, at least two “Types of data” are available with the drop-down button (e.g. contact point, Young modulus). Their unit can be changed using the “Convert” button, allowing, for instance, the user to convert Young’s modulus from “kPa” to “Pa” (type “1e3” in the dialog box, 1kPa = 1×103 Pa). If force curves have been loaded, a new data called “Indentation” is available, hereafter denoted δmax (Figure 1). This quantity represents the maximal indentation measured.
