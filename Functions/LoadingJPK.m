@@ -13,9 +13,8 @@ function out = LoadingJPK(selpath)
 %   'cell' are saved.
 %   o out.Indentation.(cell): indentation in um for one cell
 
-global answerUnzip
+
 global iLength
-answerUnzip = [];
 
 %% First folder to scan is selpath
 foldersToEval{1} = selpath;
@@ -113,41 +112,53 @@ end
 
 %% Read and save force curves from JPK
 if ~isempty(jpkDir)
-    % Read .jpk-qi-data files
-    waitbar(0.1,h,{'Reading .jpk-qi-data files.',['Remaining time: Calculating... (> ' num2str(round(2*length(jpkDir))) ' min)']});
-    for jpk = 1:length(jpkDir)
-        tic
-        temp = strsplit(jpkDir(jpk).name,'_');
-        temp = regexp(strcat(temp{1}),'\d*','Match');
-        nameCell = strcat(temp{:});
-        nameCell = matlab.lang.makeValidName(nameCell);
-        ForceCurvesFolder = UnzipJPK(fullfile(jpkDir(jpk).folder,jpkDir(jpk).name)); % Unzip the force data from jpk
+    quest = 'There are force curves. Do you want to load them?';
+    quest_r = 1;
+    while quest_r
+        answerUnzip = questdlg(quest,'Read force curves','Estimate total time','Yes','No','Yes');
+        switch answerUnzip
+            case 'Estimate total time'
+                waitbar(0.5,h,{'Reading .jpk-qi-data files.','Calculating... '});
+                jpk = 1;
+                tic
+                ReadJPK(jpkDir(jpk).folder,jpkDir(jpk).name);
+                t = toc;
+                uiwait(msgbox(['Total time estimate: ' num2str(round(t*length(jpkDir))) ' s.']));
+            case 'Yes'
+                % Read .jpk-qi-data files
+                waitbar(0.1,h,{'Reading .jpk-qi-data files.','Remaining time: Calculating... '});
+                for jpk = 1:length(jpkDir)
+                    tic
+                    temp = strsplit(jpkDir(jpk).name,'_');
+                    temp = regexp(strcat(temp{1}),'\d*','Match');
+                    nameCell = strcat(temp{:});
+                    nameCell = matlab.lang.makeValidName(nameCell);
+            
+                    [indent,height,force] = ReadJPK(jpkDir(jpk).folder,jpkDir(jpk).name);
+                    out.Force.(nameCell).force = force;
+                    out.Force.(nameCell).height = height;
+                    out.Force.(nameCell).indent = indent;
+                    out.('Indentation').(nameCell).data = indent;
+                    out.('Indentation').(nameCell).unit = 'µm';
+                    out.('Indentation').(nameCell).pixel = 1;
         
-        if ~strcmp(answerUnzip,'No')
-            jpkdata = load(fullfile(ForceCurvesFolder,'jpkdata'));
-            out.Force.(nameCell) = jpkdata;
-            load(fullfile(ForceCurvesFolder,'jpkdata'),'indent');
-            out.('Indentation').(nameCell).data = indent;
-            out.('Indentation').(nameCell).unit = 'µm';
-            out.('Indentation').(nameCell).pixel = 1;
-        end
-        if exist(fullfile(ForceCurvesFolder,'newVar.mat'),'file')
-            load(fullfile(ForceCurvesFolder,'newVar.mat'),'newVar')
-            fields = fieldnames(newVar);
-            for i = 1:length(fields)
-                out.(fields{i}).(nameCell).data = newVar.(fields{i}).(nameCell).data;
-                if isempty(newVar.(fields{i}).(nameCell).unit)
-                    out.(fields{i}).(nameCell).unit = '';
-                else
-                    out.(fields{i}).(nameCell).unit = newVar.(fields{i}).(nameCell).unit;
+                    t = toc;
+                    waitbar(jpk/length(jpkDir),h,['Reading .jpk-qi-data files. Remaining time: ' num2str(round(t*(length(jpkDir)-jpk))) ' s.']);
                 end
-                out.(fields{i}).(nameCell).pixel = newVar.(fields{i}).(nameCell).pixel;
-            end
+                quest_r = 0;
+            case 'No'
+                for jpk = 1:length(jpkDir)
+                    temp = strsplit(jpkDir(jpk).name,'_');
+                    temp = regexp(strcat(temp{1}),'\d*','Match');
+                    nameCell = strcat(temp{:});
+                    nameCell = matlab.lang.makeValidName(nameCell);
+                    out.Force.(nameCell).jpkDir = jpkDir(jpk);
+                    quest_r = 0;
+                end
         end
-        t = toc;
-        waitbar(jpk/length(jpkDir),h,['Reading .jpk-qi-data files. Remaining time: ' num2str(round(t*(length(jpkDir)-jpk)/60)) ' min.']);
     end
 end
 close(h);
 pause(0.1)
 clear h
+end

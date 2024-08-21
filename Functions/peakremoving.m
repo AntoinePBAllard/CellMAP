@@ -10,8 +10,8 @@ for x = 1:n
     for y = 1:m
         tmp = [dataTmp(x,y),dataTmp(x,y+1),dataTmp(x,y+2),dataTmp(x+1,y+2),...
             dataTmp(x+2,y+2),dataTmp(x+2,y+1),dataTmp(x+2,y),dataTmp(x+1,y)];
-        neighbor8(x,y) = 1/sum(~isnan(tmp))*nansum([dataTmp(x,y),dataTmp(x,y+1),dataTmp(x,y+2),dataTmp(x+1,y+2),...
-            dataTmp(x+2,y+2),dataTmp(x+2,y+1),dataTmp(x+2,y),dataTmp(x+1,y)]);
+        neighbor8(x,y) = 1/sum(~isnan(tmp))*sum([dataTmp(x,y),dataTmp(x,y+1),dataTmp(x,y+2),dataTmp(x+1,y+2),...
+            dataTmp(x+2,y+2),dataTmp(x+2,y+1),dataTmp(x+2,y),dataTmp(x+1,y)],'omitnan');
     end
 end
 [M,loc] = max(data_in(:)-neighbor8(:));

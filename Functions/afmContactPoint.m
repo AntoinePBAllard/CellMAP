@@ -36,9 +36,9 @@ n = length(force);
 
 % Smoothing the data
 if params.Loess
-    span = params.Span;
+    window = params.Span*n;
     method = 'loess';
-    newForce = smooth(distance,force,span,method);
+    newForce = smoothdata(force,1,method,window);
 else % No smoothing
     newForce = force;
 end
@@ -48,14 +48,15 @@ end
 % delta -> change in slopes.
 width = params.Window;
 bRoll = movingslope(newForce,width);
-delta = lagmatrix(bRoll,-params.Lagdiff)-bRoll;
+delta = [bRoll(1+params.Lagdiff:end);nan(params.Lagdiff,1)]-bRoll; % To replace lagmatrix
+% delta = lagmatrix(bRoll,-params.Lagdiff)-bRoll;
 if ~params.Delta
     delta = bRoll;
 end
 delta(1:width) = 0;
 delta(isnan(delta)) = 0;
 
-noise = std(delta(int16(n*params.MinNoise):int16(n*params.MaxNoise)),'omitnan');
+noise = std(delta(max(int16(n*params.MinNoise),1):int16(n*params.MaxNoise)),'omitnan');
 tol1 = params.Mul1*noise;
 tol2 = params.Mul2*noise;
 

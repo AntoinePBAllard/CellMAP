@@ -11,7 +11,7 @@ if ~exist(finalFolder, 'dir')
         answerUnzip = questdlg(quest,'Unzip force curves','Yes','No','Yes');
         switch answerUnzip
             case 'Yes'
-                quest = 'To speed up unzip, it is recommanded to select your own unzip program (e.g. 7z.exe). Proceed?';
+                quest = 'To speed up unziping, it is recommanded to select your own unzip program (e.g. 7z.exe). Proceed?';
                 answer2 = questdlg(quest,'Pick you unzip software','Yes','No','Yes');
                 switch answer2
                     case 'Yes'
@@ -26,10 +26,10 @@ if ~exist(finalFolder, 'dir')
     if strcmp(answerUnzip,'Yes')
         disp(['Extracting force curves: ' finalFolder])
         if strcmpi(unzipsoft(end-5:end),'7z.exe')
-            disp(['Decompress with ' unzipsoft])
+            disp(['Unzip with ' unzipsoft])
             system(['"' unzipsoft '" x -y "-o' finalFolder '" "' file '"']);
         else
-            disp('Decompress with Matlab')
+            disp('Unzip with Matlab')
             unzip(file,finalFolder)
         end
     end
