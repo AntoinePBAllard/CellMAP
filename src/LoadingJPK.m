@@ -16,6 +16,8 @@ function out = LoadingJPK(selpath)
 
 global iLength
 
+out = struct();
+
 %% First folder to scan is selpath
 foldersToEval{1} = selpath;
 txtDir = [];
@@ -201,4 +203,9 @@ end
 close(h);
 pause(0.1)
 clear h
+
+if isempty(fieldnames(out))
+    error('LoadingJPK:LoadFailed', 'No maps could be loaded from folder: %s', selpath);
+end
+
 end
