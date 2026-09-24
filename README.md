@@ -1,12 +1,15 @@
-README File --- General --- Version: 1.2 (2026-03-17) 
+README File --- General --- Version: 1.4 (2026-09-24) 
  
 This README file was generated on 2026-02-20 by Antoine ALLARD.
+
 History:
-2026-02-20: improve robustness of .txt file opening. edit of README to specify metadata required in .txt. Enable export txt of data compatible with JPK DP.
-2026-03-13: correction to load data of size (n,m); add url link to paper and readme; add popup if unable to read data; fix pixel value.
-2026-03-17: fix VarName problem with loading forces (use start time); add ROI for statistics; improve map and histo display with min and max as initial values
+- 2026-02-20: improve robustness of .txt file opening. edit of README to specify metadata required in .txt. Enable export txt of data compatible with JPK DP.
+- 2026-03-13: correction to load data of size (n,m); add url link to paper and readme; add popup if unable to read data; fix pixel value.
+- 2026-03-17: fix VarName problem with loading forces (use start time); add ROI for statistics; improve map and histo display with min and max as initial values
+- 2026-09-24: fix opening of images larger than 200x200; clarify installation process in readme.
+
 Remains to be done:
--check forces for data of size (n,m);
+- check forces for data of size (n,m);
  
 # GENERAL INFORMATION
  
@@ -24,13 +27,28 @@ Remains to be done:
 ## System Requirements
 - CellMAP requires MATLAB (R2020b or above), or Matlab Runtime, a freely accessible software that can be downloaded online. 
 - To fasten loading of force curves, a free file archiver (such as 7-Zip) is recommended.
-- Two types of installation are possible. 
-	- For Matlab license owners, run it, click on Apps from the toolbar, “Install App” and select CellMAP.mlappinstall. After completion, a new icon called CellMAP will been added in the Apps list. 
-	- For a Matlab license-free use of CellMAP, Matlab Runtime should be installed, and execute the standalone application CellMAP.exe (more details are specifically provided at the end of this file).
+
+# Installation
+
+## Option 1 — MATLAB App (recommended if you have MATLAB)
+
+**Requirements:** MATLAB R2020b or newer.
+
+1. Download `CellMAP.mltbx` from the [latest Release](https://github.com/AntoinePBAllard/CellMAP/tree/main/release).
+2. Double-click the downloaded file.
+3. MATLAB automatically detects whether this is an update and cleanly replaces any previous version — no manual uninstall needed.
+
+> ⚠️ If you installed CellMAP before version 1.2 and now see two entries under *Add-Ons → Manage Add-Ons*, uninstall both, then reinstall the latest version. This cleanup is only needed once.
+
+## Option 2 — Standalone version (no MATLAB license required)
+
+**Requirements:** Windows only.
+
+1. Download `CellMAP_installer.exe` from the [latest Release](https://github.com/AntoinePBAllard/CellMAP/tree/main/release/build).
+2. Run the installer: it installs CellMAP and, if needed, the matching MATLAB Runtime automatically.
 
 ## Description of sources and methods used to collect and generate data:
 - CellMAP is currently implemented to process AFM maps (*.txt files) and manipulate force curves (*.jpk-qi-data) that have been generated using a Nanowizard AFM (JPK-Bruker) and pre-processed using JPK Data Processing software tool.
- 
  
 # DATA & FILE OVERVIEW
  
