@@ -3,4 +3,7 @@
     <Category UUID="FileClassCategory">
         <Label UUID="design"/>
     </Category>
+    <Category UUID="Deployment_Category_4dc8d80f-680f-49dc-b121-9e436b8a2543">
+        <Label UUID="Deployment_ToolboxAppGalleryFiles_4dc8d80f-680f-49dc-b121-9e436b8a2543"/>
+    </Category>
 </Info>

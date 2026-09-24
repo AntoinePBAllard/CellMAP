@@ -1,143 +1,63 @@
-# CellMAP
+README File --- General --- Version: 1.4 (2026-09-24) 
+ 
+This README file was generated on 2026-02-20 by Antoine ALLARD.
 
-<p align="center">
-  <img src="resources/Icon.png" width="200">
-</p>
+History:
+- 2026-02-20: improve robustness of .txt file opening. edit of README to specify metadata required in .txt. Enable export txt of data compatible with JPK DP.
+- 2026-03-13: correction to load data of size (n,m); add url link to paper and readme; add popup if unable to read data; fix pixel value.
+- 2026-03-17: fix VarName problem with loading forces (use start time); add ROI for statistics; improve map and histo display with min and max as initial values
+- 2026-09-24: fix opening of images larger than 200x200; clarify installation process in readme.
 
-<p align="center">
-  <b>Open-source software for batch processing AFM cell topography and elasticity maps</b>
-</p>
+Remains to be done:
+- check forces for data of size (n,m);
+ 
+# GENERAL INFORMATION
+ 
+## Dataset title: CellMAP: an open-source software tool to batch-process cell topography and elasticity maps collected by atomic force microscopy
+ 
+## DOI: https://doi.org/10.1186/s12859-025-06060-0
+## To cite this software: Allard, A., Liboz, M., Crépin, R. et al. CellMAP: an open-source software tool to batch-process cell topography and stiffness maps collected with an atomic force microscope. BMC Bioinformatics 26, 38 (2025). https://doi.org/10.1186/s12859-025-06060-0
 
-<p align="center">
-  <img src="https://img.shields.io/badge/version-1.2-blue">
-  <img src="https://img.shields.io/badge/MATLAB-R2020b%2B-orange">
-  <img src="https://img.shields.io/badge/platform-Windows-green">
-  <img src="https://img.shields.io/badge/license-TBD-lightgrey">
-</p>
-
----
-
-## Overview
-
-CellMAP is an open-source software designed to batch-process **atomic force microscopy (AFM)** datasets, including:
-
-* Cell topography maps
-* Elasticity (Young’s modulus) maps
-* Force-indentation curves
-
-It provides an intuitive graphical interface to:
-
-* visualize AFM maps
-* inspect force curves
-* apply processing pipelines
-* compare multiple cells or experimental conditions
-* export processed datasets
-
-CellMAP was developed for AFM datasets acquired using **Nanowizard AFM (JPK-Bruker)**.
-
----
-
-## Citation
-
-If you use CellMAP in your research, please cite:
-
-Allard, A., Liboz, M., Crépin, R. *et al.*
-**CellMAP: an open-source software tool to batch-process cell topography and stiffness maps collected with an atomic force microscope**
-*BMC Bioinformatics* **26**, 38 (2025)
-DOI: https://doi.org/10.1186/s12859-025-06060-0
-
----
-
-# Features
-
-✅ Batch processing of multiple cells
-✅ AFM map visualization
-✅ Histogram analysis
-✅ ROI-based statistics
-✅ Force curve loading and visualization
-✅ Pipeline recording and replay
-✅ Export to `.txt` and session files
-✅ Compatible with JPK Data Processing exports
-
----
+ 
+## Contact email: antoine.allard@u-bordeaux.fr
+ 
+ 
+# METHODOLOGICAL INFORMATION 
+ 
+## System Requirements
+- CellMAP requires MATLAB (R2020b or above), or Matlab Runtime, a freely accessible software that can be downloaded online. 
+- To fasten loading of force curves, a free file archiver (such as 7-Zip) is recommended.
 
 # Installation
 
-## Option 1 — MATLAB App (Recommended for MATLAB users)
+## Option 1 — MATLAB App (recommended if you have MATLAB)
 
-Requirements:
+**Requirements:** MATLAB R2020b or newer.
 
-* MATLAB **R2020b or newer**
+1. Download `CellMAP.mltbx` from the [latest Release](https://github.com/AntoinePBAllard/CellMAP/tree/main/release).
+2. Double-click the downloaded file.
+3. MATLAB automatically detects whether this is an update and cleanly replaces any previous version — no manual uninstall needed.
 
-Installation:
+> ⚠️ If you installed CellMAP before version 1.2 and now see two entries under *Add-Ons → Manage Add-Ons*, uninstall both, then reinstall the latest version. This cleanup is only needed once.
 
-1. Open MATLAB
-2. Go to **Apps**
-3. Click **Install App**
-4. Select:
+## Option 2 — Standalone version (no MATLAB license required)
 
-```text
-release/CellMAP.mltbx
-```
+**Requirements:** Windows only.
 
----
+1. Download `CellMAP_installer.exe` from the [latest Release](https://github.com/AntoinePBAllard/CellMAP/tree/main/release/build).
+2. Run the installer: it installs CellMAP and, if needed, the matching MATLAB Runtime automatically.
 
-## Option 2 — Standalone Executable (No MATLAB license required)
-
-Requirements:
-
-* Windows
-* MATLAB Runtime **R2021b (9.11)**
-
-Install MATLAB Runtime from:
-
-https://www.mathworks.com/products/compiler/mcr/index.html
-
-Then run:
-
-```text
-release/build/CellMAP.exe
-```
-
----
-
-# Quick Start
-
-## 1. Organize your dataset
-
-Structure your folders as follows:
-
-```text
-Dataset/
-├── Cell_1/
-│   ├── map1.txt
-│   └── forces.jpk-qi-data
-│
-├── Cell_2/
-│   ├── map2.txt
-│   └── forces.jpk-qi-data
-```
-
-Each subfolder corresponds to:
-
-* one cell
-  or
-* one experimental object
-
----
-
-## 2. Required metadata in `.txt`
-
-Each map file must include at least:
-
-```txt
-# channel:
-# start date:
-```
-
-Example:
-
-```txt
+## Description of sources and methods used to collect and generate data:
+- CellMAP is currently implemented to process AFM maps (*.txt files) and manipulate force curves (*.jpk-qi-data) that have been generated using a Nanowizard AFM (JPK-Bruker) and pre-processed using JPK Data Processing software tool.
+ 
+# DATA & FILE OVERVIEW
+ 
+## File hierarchy convention:
+- Data should be organized as shown in the example folder “Test cells”. Within one master folder, create sub-folders for the different objects you want to merge (same cell line, same condition, etc.). While the presence of force curves is optional, each sub-folder should contain at least maps (*.txt).
+- The .txt file should contain a header with at least the following lines:
+	# channel:
+	# start date:
+For instance:
 # channel: [3] Contact Point
 # start date: Wed Nov 12 12:38:46 CET 2025
 ```
