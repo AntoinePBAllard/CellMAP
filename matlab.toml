@@ -3,7 +3,6 @@ name = "CellMAP"
 [folders]
 path = [
     "app",
-    "release",
     "src",
     "resource",
     "resource/db0ce7a1-c953-4b15-a71f-ee72ab83c801/.buildtool/25.2.0.2998904/taskTraces",
@@ -13,6 +12,9 @@ path = [
     "resource/db0ce7a1-c953-4b15-a71f-ee72ab83c801/.buildtool",
     "resource/.buildtool/26.2.0.3386108",
     "resource/db0ce7a1-c953-4b15-a71f-ee72ab83c801",
+    "release",
+    "release/build",
+    "release/package",
 ]
 
 [[package]]
@@ -26,10 +28,10 @@ supported-platforms = [
     "macos",
 ]
 display-name = "CellMAP"
-version = "1.4.3"
+version = "1.4.4"
 id = "22a12702-d084-4cfb-a6c5-f5e56df80d3b"
 use-license-bsd = false
-lastAccessed = "1790342450002"
+lastAccessed = "1790345063605"
 provider.name = "Antoine Allard"
 provider.email = "antoine.allard@u-bordeaux.fr"
 provider.organization = "Université de Bordaux"
@@ -45,3 +47,24 @@ app-gallery-files = [
     "CellMAP.mlapp",
 ]
 preview-image-file = "resource/Icon.png"
+
+[[compiler.standalone]]
+configuration-name = "CellMAP_Standalone"
+output-folder = "release/build"
+installer-output-folder = "release/package"
+executable-name = "CellMAP"
+suppress-windows-cmd-prompt = true
+executable-version = "1.0.0"
+installer-version = "1.0.0"
+auto-detect-data-files = true
+obfuscate-archive = false
+verbose = true
+embed-archive = true
+treat-inputs-as-numeric = false
+runtime-delivery = "web"
+lastAccessed = "1790346272081"
+app-file = "CellMAP.mlapp"
+author-email = "antoine.allard@u-bordeaux.fr"
+author-company = "Université de Bordeaux"
+executable-splash-screen = "resource/Icon.png"
+executable-icon = "resource/Icon.png"
