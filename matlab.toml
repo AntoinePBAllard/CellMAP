@@ -1,0 +1,39 @@
+name = "CellMAP"
+
+[folders]
+path = [
+    "app",
+    "release",
+    "src",
+]
+
+[[package]]
+configuration-name = "CellMAP_AddsOn"
+output-file-name = "CellMAP.mltbx"
+output-folder = "release"
+name = "CellMAP"
+supported-platforms = [
+    "windows",
+    "linux",
+    "macos",
+]
+display-name = "CellMAP"
+version = "1.4.2"
+id = "22a12702-d084-4cfb-a6c5-f5e56df80d3b"
+use-license-bsd = false
+lastAccessed = "1790339639513"
+provider.name = "Antoine Allard"
+provider.email = "antoine.allard@u-bordeaux.fr"
+provider.organization = "Université de Bordaux"
+summary = "CellMAP: an open-source software tool to batch-process cell topography and elasticity maps collected by atomic force microscopy."
+description = "CellMAP is currently implemented to process AFM maps (*.txt files) and manipulate force curves (*.jpk-qi-data) that have been generated using a Nanowizard AFM (JPK-Bruker) and pre-processed using JPK Data Processing software tool. "
+package-root = "/"
+product-dependencies = [
+    "Curve Fitting Toolbox",
+    "Image Processing Toolbox",
+    "Statistics and Machine Learning Toolbox",
+]
+app-gallery-files = [
+    "CellMAP.mlapp",
+]
+preview-image-file = "resources/Icon.png"
