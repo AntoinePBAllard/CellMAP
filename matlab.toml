@@ -28,7 +28,7 @@ supported-platforms = [
     "macos",
 ]
 display-name = "CellMAP"
-version = "1.4.5"
+version = "1.4.6"
 id = "22a12702-d084-4cfb-a6c5-f5e56df80d3b"
 use-license-bsd = false
 lastAccessed = "1790348140001"
