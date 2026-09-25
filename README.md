@@ -1,5 +1,3 @@
-README File --- General --- Version: 1.4 (2026-09-24) 
- 
 This README file was generated on 2026-02-20 by Antoine ALLARD.
 
 History:
